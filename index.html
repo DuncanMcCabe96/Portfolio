@@ -36,7 +36,7 @@
     <!--VIDEO TEXT-->
     <div class="Video-Text">
         <h1 class="header-text">Duncan McCabe's Portfolio</h1>
-        <b>
+        <strong>
             <p class="center">
                 <q>I'm not a great programmer; I'm just a good programmer with great habits.</q>
                 <br>
@@ -46,7 +46,59 @@
                 my background and experience
                 <br> Thank you for stopping in!
             </p>
-        </b>
+        </strong>
+    </div>
+
+    <!-- Slideshow section added -->
+    <div id="Slideshow">
+        <div id="Slideshow_Background"> 
+            <div id="Slideshow_Container">
+                <!-- Slide 1 of 6 -->
+                <div class="mySlides fade">
+                    <img class="Slideshow_Images" src="images/Duncan.jpeg" alt="Picture of yourself">
+                    <div class="text">I'm available to assist you on your project!</div>
+                </div>
+                <!-- Slide 2 of 6 -->
+                <div class="mySlides fade">
+                    <img class="Slideshow_Images" src="images/HTML_CSS_and_JavaScript.jpeg" alt="HTML, CSS, and JS logos"> 
+                    <div class="text">I am a full-stack software developer,<br> trained in:<br>HTML, CSS, JavaScript,</div>
+                </div>
+                <!-- Slide 3 of 6 -->
+                <div class="mySlides fade">
+                    <img class="Slideshow_Images" src="images/Python.png" alt="Python logo">
+                    <div class="text">the popular programming language Python,</div>
+                </div>
+                <!-- Slide 4 of 6 -->
+                <div class="mySlides fade">
+                    <img class="Slideshow_Images" src="images/C_Sharp_and_Dot_NET(1).png" alt="C# logo">
+                    <div class="text">C#, .NET Framework, ASP.NET, MVC, </div>
+                </div>
+                <!-- Slide 5 of 6 -->
+                <div class="mySlides fade">
+                    <img class="Slideshow_Images" src="images/SQL_and_Database.jpg" alt="SQL logo"> 
+                    <div class="text">back end development, databases and SQL.</div>
+                </div>
+                <!-- Slide 6 of 6 -->
+                <div class="mySlides fade">
+                    <img class="Slideshow_Images" src="images/mail.png" alt="picture of mail"> 
+                    <div class="text"><a class="white-text contact" onclick="openForm()">Contact me now!</a></div> 
+                </div>
+                <!-- Previous and next buttons -->
+                <a class="Previous" onclick="plusSlides(-1)">&#10094;</a>
+                <a class="Next" onclick="plusSlides(1)">&#10095;</a>
+            </div>
+            <br> <!-- Adds a space between the slideshow images and the dots -->
+
+            <!-- Slideshow dots (these are another way for users to navigate through the slideshow) -->
+            <div style="text-align: center">
+                <span class="dot" onclick="currentSlide(1)"></span>
+                <span class="dot" onclick="currentSlide(2)"></span>
+                <span class="dot" onclick="currentSlide(3)"></span> 
+                <span class="dot" onclick="currentSlide(4)"></span> 
+                <span class="dot" onclick="currentSlide(5)"></span> 
+                <span class="dot" onclick="currentSlide(6)"></span> 
+            </div>
+        </div>
     </div>
 
     <!--ABOUT SECTION-->
@@ -116,4 +168,6 @@
     <footer>
         <p class="center">&copy Prosper Consulting Inc., <a href="https://www.learncodinganywhere.com/" target="_blank">The Tech Academy</a></p>
     </footer>
+    <script src="js/portfolio.js"></script>
 </body>
+</html>
