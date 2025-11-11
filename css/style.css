@@ -1,545 +1,711 @@
-/***GENERAL STYLING***/
-@import url('https://fonts.googleapis.com/css2?family=Alegreya+Sans+SC:ital,wght@0,100;0,300;0,400;0,500;0,700;0,800;0,900;1,100;1,300;1,400;1,500;1,700;1,800;1,900&family=Dosis:wght@200..800&family=Yesteryear&display=swap');/*fonts from fonts.google.com*/
-@import url('https://fonts.googleapis.com/css2?family=Dosis:wght@200..800&family=Yesteryear&display=swap');/*fonts from fonts.google.com*/
-html{
-    scroll-behavior: smooth; /*This ensures that the page scrolling is smooth when the buttons on the nav bar is clicked */
+/* Import Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Alegreya+Sans+SC:ital,wght@0,100;0,300;0,400;0,500;0,700;0,800;0,900;1,100;1,300;1,400;1,500;1,700;1,800;1,900&family=Dosis:wght@200..800&display=swap');
+
+/* ===== CSS VARIABLES ===== */
+:root {
+    /* Color Palette */
+    --primary-gold: #DE9E48;
+    --dark-brown: #7a431d;
+    --medium-brown: #372c2e;
+    --light-brown: #563727;
+    --black: #000000;
+    --white: #ffffff;
+    --gray: #808080;
+    
+    /* Spacing */
+    --spacing-xs: 0.5rem;
+    --spacing-sm: 1rem;
+    --spacing-md: 2rem;
+    --spacing-lg: 3rem;
+    --spacing-xl: 4rem;
+    
+    /* Typography */
+    --font-primary: "Dosis", sans-serif;
+    --font-secondary: "Alegreya Sans SC", serif;
+    
+    /* Transitions */
+    --transition-fast: 0.3s ease;
+    --transition-medium: 0.6s ease;
+    --transition-slow: 1s ease;
+    
+    /* Shadows */
+    --text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.8);
+    --box-shadow: 0 5px 10px 12px rgba(0, 0, 0, 0.75);
+    --box-shadow-light: 0 2px 8px rgba(0, 0, 0, 0.3);
 }
 
-/*BODY*/
-body{
-    margin: 0%;
-    font-family: "Dosis", sans-serif;
+/* ===== RESET & BASE STYLES ===== */
+*, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
 }
 
-/*Heading 1 elements*/
-h1{
+html {
+    scroll-behavior: smooth;
+    font-size: 16px;
+}
+
+body {
+    font-family: var(--font-primary);
+    line-height: 1.6;
+    color: var(--white);
+    overflow-x: hidden;
+}
+
+/* ===== TYPOGRAPHY ===== */
+h1, h2 {
     text-align: center;
     text-transform: uppercase;
-    font-family: "Dosis", serif;
-    margin-top: 3%;
-    color: #DE9E48;
-    text-shadow:2px 2px 8px #000000;
+    font-family: var(--font-primary);
+    color: var(--primary-gold);
+    text-shadow: var(--text-shadow);
+    margin-bottom: var(--spacing-md);
 }
 
-/*Styling for portfolio header text*/
-.header-text{
-    color: #DE9E48;
+h1 {
+    font-size: clamp(2rem, 5vw, 3.5rem);
 }
 
-/*Paragraph elements*/
-p{
-    font-family: "Alegreya Sans SC", serif;
-    text-align: justify;
-    color: #ffffff;
+h2 {
+    font-size: clamp(1.75rem, 4vw, 3rem);
+    margin-top: var(--spacing-md);
+}
+
+p {
+    font-family: var(--font-secondary);
+    color: var(--white);
     letter-spacing: 1px;
-    font-size: 18px;
-    padding-left: 20px;
-    padding-right: 20px;
-    text-shadow:2px 2px 8px #000000;
+    font-size: clamp(1rem, 1.5vw, 1.25rem);
+    padding: 0 var(--spacing-sm);
+    text-shadow: var(--text-shadow);
+    margin-bottom: var(--spacing-sm);
 }
 
-/*Center class- applies to elements witht he class "center"*/
-.center{
+.center {
     text-align: center;
 }
 
-/*Anchor Elements*/
-a{
-    color: #DE9E48;
+/* ===== LINKS ===== */
+a {
+    color: var(--primary-gold);
+    text-decoration: none;
+    transition: color var(--transition-fast);
 }
 
-/*Quotation elements*/
-q{
-    font-style: italic;
+a:hover {
+    color: var(--white);
 }
 
-/*Image elements*/
+a:focus {
+    outline: 2px solid var(--primary-gold);
+    outline-offset: 2px;
+}
+
+/* ===== IMAGES ===== */
 img {
     border-radius: 20px;
     max-width: 100%;
-    height: 90%;
+    height: auto;
     display: block;
-    margin-left: auto;
-    margin-right: auto;
+    transition: transform var(--transition-slow);
 }
 
-/*Image Hover Effects*/
-img:hover{
-    transition: transform 1s;
-    transform: scale(1.1);
+img:hover {
+    transform: scale(1.05);
 }
 
-/* The @media rule is used in media queries to apply different styles for different media/types of devices */
-/* On screens 576px and smaller the images will be 100px tall and centered vertically in the column */
-@media screen and (max-width: 1000px) {
-    img {
-        height: 100px;
-        margin-top: 150px;
-    }
-
-    p{
-        font-size: 1.75vw;
-    }
-}
-
-/*Styling for footer elemenmt*/
-footer{
-    padding: 1%;
-    background-color: #7a431d;
-}
-
-/***END OF GENERAL STYLING***/
-
-/***NAVBAR STYLING***/
-.navbar{
-    overflow: hidden;
-    background-color: #7a431d;
+/* ===== NAVIGATION BAR ===== */
+.navbar {
     position: fixed;
     top: 0;
     width: 100%;
-    z-index: 1;
-    -webkit-animation: moveNav 3s;
-    animation: moveNav 3s;
+    background-color: var(--dark-brown);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    box-shadow: var(--box-shadow-light);
+    animation: slideDown 0.8s ease-out;
 }
 
-/* moveNav animation effect for moving the nav bar in from the left of the screen */
-@keyframes moveNav {
-    from {left: -100vw;} /* The navbar is starting off screen to the left */
-    to {left: 0vw;} /* This moves the navbar into place on the screen */
+@keyframes slideDown {
+    from {
+        transform: translateY(-100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
 }
 
-/*Navbar links*/
-.navbar a{
-    float: left;
-    display: block;
-    color: #DE9E48;
-    padding: 14px 16px;
-    text-decoration: none;
-    font-family: "Dosis", serif;
-    font-size: 20px;
+.nav-link {
+    color: var(--primary-gold);
+    padding: 1rem 1.5rem;
+    font-size: clamp(1rem, 2vw, 1.25rem);
     font-weight: 600;
     text-align: center;
+    transition: all var(--transition-fast);
     position: relative;
-    -webkit-animation: moveNavText 3.25s;
-    animation: moveNavText 3.25s;
 }
 
-@keyframes moveNavText {
-    from {top: -100vw;} /* This sets the navbar text 100% above the viewport */
-    to {top: 0vw;} /* This lowers the navbar text onto the navbar */
-}
-
-@keyframes moveNavText {
-    from {top: -100vw;} /* This sets the navbar text 100% above the viewport */
-    to {top: 0vw;} /* This lowers the navbar text onto the navbar */
-}
-
-/*Navbar hover effects*/
-.navbar a:hover{
-    background-color: #372c2e;
-    transition: transform 1s; 
-	transform: scale(1.1);
-    font-weight: bold;
-}
-
-.navbar a.active1{
-    background-color: #7a431d;
-}
-.navbar a.active2{
-    background-color: #372c2e
-}
-.navbar a.active3{
-    background-color: #000000;
-}
-.navbar a.active4{
-    background-color: #563727;
-}
-
-/***END OF NAVBAR STYLING***/
-
-/*VIDEO STYLING***/
-
-/*Format for background video*/
-#Tech_Video{
-    filter: grayscale(70%);
-    position: fixed;
-    right: 0;
+.nav-link::after {
+    content: '';
+    position: absolute;
     bottom: 0;
-    min-width: 100%;
+    left: 50%;
+    width: 0;
+    height: 3px;
+    background-color: var(--primary-gold);
+    transition: all var(--transition-fast);
+    transform: translateX(-50%);
+}
+
+.nav-link:hover {
+    background-color: var(--medium-brown);
+    transform: scale(1.05);
+}
+
+.nav-link:hover::after {
+    width: 80%;
+}
+
+/* ===== HERO SECTION ===== */
+.hero-section {
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.background-video {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: grayscale(70%);
     z-index: -1;
 }
 
-/* Screens that are 576px and smaller will not display the background video */
-@media screen and (max-width: 576px) {
-    #Typing_Video {
+.hero-content {
+    background: rgba(0, 0, 0, 0.7);
+    padding: var(--spacing-lg);
+    border-radius: 20px;
+    max-width: 900px;
+    margin: var(--spacing-md);
+    animation: fadeInUp 1s ease-out;
+    backdrop-filter: blur(5px);
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.hero-title {
+    margin-bottom: var(--spacing-md);
+}
+
+.hero-quote {
+    font-style: italic;
+    margin: var(--spacing-md) 0;
+}
+
+.hero-quote cite {
+    font-style: normal;
+    display: block;
+    margin-top: var(--spacing-sm);
+}
+
+.hero-description {
+    text-align: center;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+/* ===== SECTION CONTAINERS ===== */
+.section-container {
+    min-height: 100vh;
+    padding: var(--spacing-xl) var(--spacing-md);
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.content-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--spacing-md);
+    max-width: 1400px;
+    width: 100%;
+    margin: 0 auto;
+    align-items: stretch;
+}
+
+.content-column {
+    background-color: rgba(58, 44, 46, 0.95);
+    padding: var(--spacing-lg);
+    border-radius: 20px;
+    border: 3px solid var(--black);
+    box-shadow: var(--box-shadow-light);
+    animation: fadeIn 1s ease-out;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    min-height: 60vh;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+.text-column {
+    background-color: rgba(122, 67, 29, 0.95);
+}
+
+.image-column {
+    background-color: rgba(55, 44, 46, 0.95);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.image-column img {
+    margin: 0 auto;
+}
+
+/* ===== SLIDESHOW SECTION ===== */
+.slideshow-section {
+    min-height: 100vh;
+    padding: var(--spacing-xl) var(--spacing-md);
+    background: rgba(255, 255, 255, 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.slideshow-background {
+    max-width: 1400px;
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--spacing-md);
+}
+
+.slideshow-container {
+    position: relative;
+    width: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: var(--box-shadow);
+    border: 3px solid var(--black);
+    min-height: 60vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.slide {
+    display: none;
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.slide.active {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    animation: fadeSlide 1s ease-in-out;
+}
+
+@keyframes fadeSlide {
+    from {
+        opacity: 0.5;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+.slide img {
+    width: 100%;
+    height: auto;
+    max-height: 60vh;
+    object-fit: contain;
+    border-radius: 0;
+}
+
+.slide-caption {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+    color: var(--white);
+    padding: var(--spacing-md);
+    text-align: center;
+    font-size: clamp(1rem, 2vw, 1.5rem);
+    font-weight: bold;
+    letter-spacing: 0.1em;
+}
+
+.contact-link {
+    background: none;
+    border: none;
+    color: var(--primary-gold);
+    cursor: pointer;
+    font-size: inherit;
+    font-weight: bold;
+    text-decoration: underline;
+    padding: 0;
+    transition: color var(--transition-fast);
+}
+
+.contact-link:hover {
+    color: var(--white);
+}
+
+/* Slide Controls */
+.slide-control {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgba(0, 0, 0, 0.5);
+    color: var(--gray);
+    border: none;
+    font-size: clamp(1.5rem, 3vw, 2.5rem);
+    padding: 1rem;
+    cursor: pointer;
+    transition: all var(--transition-medium);
+    z-index: 10;
+}
+
+.slide-control:hover {
+    background-color: rgba(0, 0, 0, 0.9);
+    color: var(--white);
+}
+
+.slide-control.prev {
+    left: 0;
+    border-radius: 0 10px 10px 0;
+}
+
+.slide-control.next {
+    right: 0;
+    border-radius: 10px 0 0 10px;
+}
+
+/* Slide Dots */
+.slide-dots {
+    text-align: center;
+    padding: var(--spacing-md) 0;
+}
+
+.dot {
+    height: 15px;
+    width: 15px;
+    margin: 0 var(--spacing-xs);
+    background-color: var(--white);
+    border-radius: 50%;
+    display: inline-block;
+    cursor: pointer;
+    transition: background-color var(--transition-medium);
+    border: 2px solid transparent;
+}
+
+.dot:hover,
+.dot.active {
+    background-color: var(--primary-gold);
+    border-color: var(--white);
+    transform: scale(1.2);
+}
+
+/* ===== CONTACT BUTTON ===== */
+.contact-button {
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    background-color: var(--primary-gold);
+    color: var(--black);
+    border: 3px solid var(--black);
+    padding: 1rem 2rem;
+    font-size: clamp(1rem, 2vw, 1.5rem);
+    font-weight: bold;
+    cursor: pointer;
+    border-radius: 50px;
+    box-shadow: var(--box-shadow-light);
+    transition: all var(--transition-fast);
+    z-index: 999;
+    animation: slideInRight 1s ease-out;
+}
+
+@keyframes slideInRight {
+    from {
+        transform: translateX(200px);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+.contact-button:hover {
+    background-color: var(--white);
+    transform: scale(1.1);
+    box-shadow: 0 5px 20px rgba(222, 158, 72, 0.5);
+}
+
+/* ===== CONTACT FORM ===== */
+.form-popup {
+    display: none;
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    z-index: 1000;
+    animation: fadeInUp 0.5s ease-out;
+}
+
+.form-popup.show {
+    display: block;
+}
+
+.form-container {
+    background-color: var(--medium-brown);
+    padding: var(--spacing-lg);
+    border-radius: 20px;
+    box-shadow: var(--box-shadow);
+    max-width: 500px;
+    border: 3px solid var(--black);
+}
+
+.form-container h2 {
+    margin-top: 0;
+    margin-bottom: var(--spacing-md);
+}
+
+.form-container label {
+    display: block;
+    color: var(--primary-gold);
+    margin-bottom: var(--spacing-xs);
+    font-weight: bold;
+}
+
+.form-container input[type="text"],
+.form-container input[type="email"],
+.form-container input[type="tel"],
+.form-container textarea {
+    width: 100%;
+    padding: 0.75rem;
+    margin-bottom: var(--spacing-sm);
+    border: 2px solid var(--black);
+    background-color: rgba(0, 0, 0, 0.7);
+    color: var(--white);
+    font-size: 1rem;
+    border-radius: 10px;
+    font-family: var(--font-primary);
+    transition: border-color var(--transition-fast);
+}
+
+.form-container input:focus,
+.form-container textarea:focus {
+    outline: none;
+    border-color: var(--primary-gold);
+}
+
+.form-container textarea {
+    resize: vertical;
+    min-height: 100px;
+}
+
+.btn {
+    width: 100%;
+    padding: 1rem;
+    font-size: 1.25rem;
+    font-weight: bold;
+    cursor: pointer;
+    border: 2px solid var(--black);
+    border-radius: 10px;
+    transition: all var(--transition-fast);
+    font-family: var(--font-primary);
+    letter-spacing: 0.2em;
+}
+
+.submit-btn {
+    background-color: var(--white);
+    color: var(--black);
+    margin-bottom: var(--spacing-sm);
+}
+
+.submit-btn:hover {
+    background-color: var(--primary-gold);
+    color: var(--white);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+.cancel-btn {
+    background-color: var(--black);
+    color: var(--white);
+    border-color: var(--gray);
+}
+
+.cancel-btn:hover {
+    background-color: var(--primary-gold);
+    border-color: var(--black);
+    transform: translateY(-2px);
+}
+
+/* ===== FOOTER ===== */
+.site-footer {
+    background-color: var(--dark-brown);
+    padding: var(--spacing-md);
+    text-align: center;
+    border-top: 3px solid var(--black);
+}
+
+.site-footer p {
+    margin: 0;
+}
+
+/* ===== RESPONSIVE DESIGN ===== */
+
+/* Tablets and smaller */
+@media screen and (max-width: 768px) {
+    .navbar {
+        flex-wrap: wrap;
+    }
+    
+    .nav-link {
+        flex: 1 1 50%;
+        padding: 0.75rem;
+    }
+    
+    .hero-content {
+        padding: var(--spacing-md);
+        margin: var(--spacing-sm);
+    }
+    
+    .section-container {
+        padding: var(--spacing-md) var(--spacing-sm);
+        min-height: auto;
+    }
+    
+    .content-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .content-column {
+        padding: var(--spacing-md);
+        min-height: 40vh;
+    }
+    
+    .contact-button {
+        bottom: 1rem;
+        right: 1rem;
+        padding: 0.75rem 1.5rem;
+    }
+    
+    .form-popup {
+        bottom: 1rem;
+        right: 1rem;
+        left: 1rem;
+    }
+    
+    .form-container {
+        max-width: 100%;
+        padding: var(--spacing-md);
+    }
+    
+    .slide-control {
+        padding: 0.5rem;
+        font-size: 1.5rem;
+    }
+    
+    .slideshow-section {
+        min-height: auto;
+        padding: var(--spacing-md) var(--spacing-sm);
+    }
+    
+    .slideshow-container {
+        min-height: 50vh;
+    }
+    
+    .slide img {
+        max-height: 50vh;
+    }
+}
+
+/* Mobile phones */
+@media screen and (max-width: 480px) {
+    .nav-link {
+        flex: 1 1 100%;
+        padding: 0.5rem;
+    }
+    
+    .hero-content {
+        padding: var(--spacing-sm);
+    }
+    
+    .background-video {
         display: none;
     }
-}
-
-/*Texts over the video*/
-.Video-Text {
-    background:rgba(0,0,0,0.6);
-    color: white;
-    width: 100%;
-    padding: 20px;
-    position: relative;
-    -webkit-animation: moveVideoText 5.75s;
-    animation: moveVideoText 5.75s;
-}
-
-/* This animation effect causes the overlay video text to move up from the bottom of the page upon page load */
-@keyframes moveVideoText {
-    from {top: -100vw;} /* This sets the position of the video text to above the viewport */
-    to {top: 0vw;} /* This moves the video text to the normal positioning on the viewport */
-}
-/***END OF VIDEO STYLING***/
-
-/***** Slideshow Styling *****/
-#Slideshow_Background {
-    background: rgba(255, 255, 255, 0.35); /* This creates a slightly transparent white background that's palced over the video in the background */    
-}
-
-.mySlides{
-    display: none; /* This prevents the images from being displayed, we will use JS to display these */
-}
-
-/* Slideshow section / container */
-#Slideshow_Container {
-    width: 39.5vw; /* Relative sizing of the container for the slidewshow set to 39.5% of the viewport width */
-    height: auto; /* The height of the container is automatically adjusted based on the content it is displaying */
-    padding-top: 4%; /* Adds a small padding to the top of the slideshow container */
-    position: relative; /* This sets the container relative to its normal positioning */
-    margin:auto; /* This will horizontally center the container on the page */
-}
-
-/* Remove the underline from the previous and next buttons on the slideshow */
-#Slideshow_Container a {
-    text-decoration: none;
-}
-
-/* Images contained within the slideshow */
-.Slideshow_Images {
-    vertical-align: middle; /* This centers the images vertically within the slideshow container */
-    height: auto; /* The height of the images is automatically adjusted based on the content, ie if your images are different sizes, they will display as different sizes */
-    box-shadow: 0px 5px 10px 12px rgba(0, 0, 0, .75); /* Adds a shadow around the slideshow images */
-    width: 100%; /* The width of the images is automatically adjusted based on the content */
-}
-
-/* Next and previous buttons */
-.Previous, .Next {
-    cursor: pointer; /* Changes the mouse to a pointer when the buttons are selected */
-    position: absolute; /* This makes the next and previous buttons positioned relative to the slideshow container */
-    top: 50%; /* This moves the buttons up in the slideshow container */
-    width: auto; /* The width of the buttons is automatically adjusted based on the content */
-    padding: 2vw; /* Adds padding equal to 2% of the viewport width */
-    color: darkgray; 
-    font-weight: bold;
-    font-size: 1.5vw;
-    border-radius: 0 3px 3px 0; /* Adds a slightly rounded border on the top and bottom right corners */
-    user-select: none; /* This property makes it so that the user cannot highlight the text */
-    transition: 0.6s ease; /* This specifies the details of the hover transition for these elements */
-}
-
-/* Positioning the next button on the right hand side */
-.Next {
-    right: 0; /* This moves the next button to the right side of the slideshow container */
-    border-radius: 3px 0 0 3px; /* This changes the border radius on the next button to the top and bottom left of the button */
-}
-
-/* Hover effect on slide show buttons */
-.Previous:hover, .Next:hover {
-    background-color: rgba(0, 0, 0, 0.8); /* Makes the background of the arrows a transparent gray color */
-    color: white; /* Makes the arrows white when hovered over */
-}
-
-/* Slideshow text */
-.text {
-    color: white; 
-    padding: 1vw;
-    position: absolute; /* This ensures the text is positioned within the image */
-    bottom: 0; /* This property sets the text at the bottom of the image */
-    width: 100%; /* The element covers the full width of the image */
-    text-align: center; /* The text is center aligned within the image */
-    font-family: Perpetua, Rockwell Extra Bold;
-    letter-spacing: .1vw; /* This gives slight spacing between the letters */
-    font-size: 1.5vw; /* Font size is relative to the size of the viewport width */
-    background-color: rgba(0, 0, 0, 0.75); /* Gives a slightly transparent black background */
-    font-weight: bold;
-    border-radius: 0px 0px 7px 7px; /* Gives the text background rounded corners on the bottom left and right corners */
-}
-
-/* Styling of the dots under the slideshow */
-.dot {
-    cursor: pointer; /* The cursor changes to pointer when hovered over the dots */
-    height: 1vw; /* The dots are sized relative to the viewport width */
-    width: 1vw;
-    margin: .25vw; /* adds additional spacing between the dots */ 
-    background-color: white; /* Makes the dots white */
-    border-radius: 50%; /* Makes the dots circles by rounding each corner */
-    display: inline-block; /* Allows the dots to sit next to eachother rather than on a new line */
-    transition: background-color 0.6s ease; /* When clicked on the dots transition to a different color when clicked or hovered over (the affect is defined below) */
-    z-index: 1; /* This ensures the dots will be displayed above any other elements */
-}
-
-/* Hover effect for slideshow dots */
-.active, .dot:hover {
-    background-color: black; /* Sets the color of the dots when active or hovered over */
-}
-
-/* Fading animation for slideshow */
-.fade {
-    animation-name: fade; /* Fade animation is defined below */
-    animation-duration: 1.5s; /* The animation lasts 1.5 seconds */
-    -webkit-animation-name: fade; /* Same as above for Safari 4.0-8.0 */
-    -webkit-animation-duration: 1.5s;
-}
-
-@-webkit-keyframes fade {
-    from {opacity: .4;} /* Image starts transparent */
-    to {opacity: 1;} /* Image ends opaque */
-}
-
-@keyframes fade {
-    from {opacity: .4;} /* Image starts transparent */
-    to {opacity: 1;} /* Image ends opaque */
-}
-/***** End Slideshow Styling *****/
-/***TABLE STYLING - this section covers the styling of the columns and rows within the table ***/
-* { /* The asterisk is a universal selector that applies this effect to all elements on the page */
-    box-sizing: border-box; /* This creates a box with a border within which we will place most of our text */
-} 
-
-.Column_1 {
-    border: 3px solid black;
-    filter: opacity(90%);
-    float: left;
-    width: 50%; /* This ensures the column takes up half of the page width */
-    padding: 10px;
-    padding-top: 3%; /* This ensures there is space between the top of the column and our headings */
-    height: auto; /* This sets the height of the column to 400px -  this may need to be adjusted depending on the text you enter */
-    background-color: rgba(124, 69, 29, 0.9); /* Sets the background color of the columns with class Column_1 */   
-}
-
-.Column_2 {
-    border: 3px solid black;
-    filter: opacity(90%);
-    float: left;
-    width: 50%;
-    padding: 10px;
-    padding-top: 3%;
-    height: auto;;
-    background-color: #372c2e;
-}
-/* This class is applied to the columns in the final row, overriding the height and padding to provide more room for the contact form  while keeping the rest of the formatting from Column_1 or Column_2 */
-.Column_tall {
-    padding-top: 0%;
-    height: 500px;
-    width: 100%;
-}
-
-/* This inserts something after the content of selected elements (in this case the elements with class "Row") */
-.Row:after {
-	content: ""; /* By leaving this blank, we are allowing the footer (covered lower down) to be displayed - removing it makes the footer overwrite a column */
-	display: table; /* The display property specifies the type of display behavior; the table value tells the browser to treat the element as a table */
-	clear: both; /* This clears any other elements from floating on the left or the right of an element */
-}
-
-.Img1{
-    filter: none;
-}
-/***** END OF TABLE STYLING *****/
-
-/***** Contact Form Styling *****/
-/* Button used to open the contact form - fixed at the bottom of the page */
-.Pop_Up_Button {
-    position: fixed; /* The element is positioned relative to the viewport and stays in the same location no matter what */
-    bottom: 1.75vw; /* Positions the button slightly up from the bottom of the viewport */
-    right: 1.75vw; /* Positions the viewport slightly right from the side of the viewport */
-    width: 25vw; /* Sets the width relative to the viewport width */
-    background-color:#DE9E48; /* Sets the background color of the button to white */
-    color: rgb(0, 0, 0); /* Sets the color of the button text to black */
-    border: solid rgb(0, 0, 0); /* This makes a solid black border around the button */
-    cursor: pointer; /* This changes the cursor when hovered over the button to a pointer */
-    -webkit-animation: movePopup 5s; /* Animation for 5 seconds for Safari 4.0-8.0 */
-    animation: movePopup 5s; /* Animation set for 5 seconds */
-    box-shadow: #ffffff;
-}
-
-/* movePopup animation moves the button from off the right side of the screen to its fixed location on the viewport */
-@keyframes movePopup {
-    from {right: -40vw;} 
-    to {right: 1.75vw;}
-}
-
-@-webkit-keyframes movePopup {
-    from {right: -40vw;} 
-    to {right: 1.75vw;}
-}
-
-/* Styling for the contact form */
-.form-popup {
-    z-index: 8; /* This z-index ensures the contact form shows above all other elements on the page */
-    display: none; /* Set the display to none, we will use JavaScript to show the contact form */
-    position: fixed; /* The form stays in the same location no matter what */
-    bottom: .5vw; /* Slightly up from the bottom of the viewport */
-    right: .5vw; /* Slightly in from the right side of the viewport */
-}
-
-/* Form styling */
-.form-container {
-    max-width: 49vw; /* Relative sizing of the form container - 49% of the viewport width */
-    padding: 1vw; /* Adds padding between the form-popup and the form-container */
-    background-color: #372c2e; 
-}
-
-/* Input fields */
-.form-container input[type=text] {
-    width: 100%; /* The input boxes completely fill the width of the form-container */
-    padding: .93vw; /* Adds padding to the input boxes */
-    margin: .6vw 0 .6vw 0; /* Adds space between the input boxes and the labels */
-    border: none; /* Removes the border from the input boxes */
-    background: rgb(0, 0, 0); /* Sets the background color of the input boxes */
-    font-size: 1vw; /* Relative font sizing based on the width of the viewport */
-    color: white; /*Makes it so the inputed text is white*/
-}
-
-/* General styling for all buttons */
-button {
-    font-family: "Dolsis", Optima;
-    letter-spacing: .3vw; /* Adds slight spacing between the letters */
-    font-size: 1.5vw; /* Relative sizing of text */
-    font-weight: bold; 
-    padding: 1.5vw; /* Adds padding to the text in the button */
-    cursor: pointer; /* Changes the cursor to pointer over button elements */
-    width: 100%; /* Sets the width of the buttons to 100% of their containers */
-    height: auto; /* Allows the height to be resized depending on the content showing */
-}
-
-/* Hover effect for contact and submit buttons */
-button:hover, .form-container .btn:hover {
-    color: white; /* This makes the text in the buttons white when hovered over */
-    background-color: #DE9E48; /* The background of the button changes to black when hovered over */
-    transition-duration: 1s; /* This makes the transition last 1 second */
-    -webkit-transition-duration: 1s; /* For Safari 4.0-8.0 */
-    border-color: silver; /* The border turns silver when the button is hovered over */
-}
-
-/* Submit button */
-.form-container .btn {
-    background-color: white; 
-    color: black;
-    border-color: black;
-    margin-bottom: 1vh; /* Adds space between the submit button and the close button */
-}
-
-/* Close button */
-.form-container .cancel {
-    background-color: black;
-    color: white;
-    border-color: gray;
-}
-
-/* Styling for close button on hover */
-.form-container .cancel:hover {
-    color: white;
-    background-color: #DE9E48;
-    transition-duration: 1s;
-    -webkit-transition-duration: 1s;
-    border-color: black;
-}
-/***** End of Contact Form Styling *****/
-
-/***** Media Query Section *****/
-/*Media rules for paragraph font size for different screen sizes*/
-@media screen and (max-width: 527px) {
-    p {
-        font-size: 3.75vw;
+    
+    .hero-section {
+        background: linear-gradient(135deg, var(--dark-brown), var(--medium-brown));
+    }
+    
+    .contact-button {
+        width: calc(100% - 2rem);
+        left: 1rem;
+        right: 1rem;
     }
 }
 
-@media screen and (min-width: 528px) and (max-width: 660px) {
-    p {
-        font-size: 3.5vw;
+/* Large screens */
+@media screen and (min-width: 1400px) {
+    .content-column {
+        min-height: 70vh;
+    }
+    
+    .slideshow-container {
+        min-height: 70vh;
+    }
+    
+    .slide img {
+        max-height: 70vh;
     }
 }
 
-@media screen and (min-width: 661px) and (max-width: 799px) {
-    p {
-        font-size: 2.75vw;
+/* Accessibility: Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+    
+    html {
+        scroll-behavior: auto;
     }
 }
-
-@media screen and (min-width: 800px) and (max-width: 924px) {
-    p {
-        font-size: 2.5vw;
-    }
-}
-
-@media screen and (min-width: 925px) and (max-width: 1050px) {
-    p {
-        font-size: 2.25vw;
-    }
-}
-
-@media screen and (min-width: 1051px) and (max-width: 1310px) {
-    p {
-        font-size: 2vw;
-    } 
-}
-
-@media screen and (min-width: 1311px) and (max-width: 1535px) {
-    p {
-        font-size: 1.75vw;
-    }
-}
-
-@media screen and (min-width: 1536px) and (max-width: 2269px) {
-    p {
-        font-size: 1.5vw;
-    }
-}
-
-@media screen and (min-width: 2270px) {
-    p {
-        font-size: 1.35vw;
-    }
-}
-
-/*Media rule for navbar links for different screen sizes*/
-/* Screens 1080px and smaller will display navbar links equally distributed */
-@media screen and (max-width: 1080px) {
-    .Navbar a{
-        width: 20%; /* This sets each navbar link to 1/5 of the navbar */
-        font-size: 2.5vw;
-    }
-}
-
-/* Media rules to enlarge the font of the white text for smaller screens */
-@media screen and (max-width: 1080px) {
-    .quote{
-        font-size: 3.5vw;
-    }
-
-    .white-text {
-        font-size: 4.5vw;
-    }
-}
-
-/* Media rules to increase the size of the columns for larger screens */
-@media screen and (min-width: 1725px) {
-    .Column_1 {
-        height: 550px;
-    }
-    .Column_2 {
-        height: 550px;
-    }
-}
-
-
-/*Media rule to remove margin-top from h1 elements for extra large screens (so that the paragraph text fits in the column*/
-@media screen and (min-width: 2000px) {
-    h1{
-        margin-top: 0;
-    }
-}
-/***** End of Media Query Section *****/
